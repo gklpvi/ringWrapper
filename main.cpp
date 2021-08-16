@@ -1,13 +1,10 @@
 #include <iostream>
 #include "rte_eal.h"
 #include "rte_debug.h"
-#include "rte_debug.h"
 
 #include "rte_ring.h"
 
 using namespace std;
-
-
 
 class ringWrapper{
   rte_ring* myRing;
@@ -38,7 +35,15 @@ int main(int argc, char** argv)
 
     ringWrapper temp(name, 1, 0, RING_F_SP_ENQ);  // to try ring wrapper
 
-    cout << temp.getPtr <<endl;
+    cout << temp.getPtr() <<endl;
+    cout <<"full: " << rte_ring_full(temp.getPtr()) << " -  empty: " <<  rte_ring_empty(temp.getPtr()) <<endl;
 
+    int x = 5;
+    void* ptrInt = &x;
+    temp.enqueue(ptrInt);
+    cout <<"full: " << rte_ring_full(temp.getPtr()) << " -  empty: " <<  rte_ring_empty(temp.getPtr()) <<endl;
+
+    void** deq;
+    cout << temp.dequeue(deq) << endl;
     return 0;
 }
