@@ -42,7 +42,8 @@ int main(int argc, char** argv)
 
     void* deq;
     cout << temp.dequeue(&deq) << endl;
-    //cout << *deq << endl;
+    int* derefPtr = (int*) deq;
+    cout << *derefPtr << endl;
 
     return 0;
 }
