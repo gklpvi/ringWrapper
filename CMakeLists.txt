@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
+set( CMAKE_CXX_FLAGS "-O0 -g" )
+
 project(Tutorial)
 
 link_directories(/home/gklpvi/Downloads/dpdk-stable-19.11.9/x86_64-native-linuxapp-gcc/lib)
