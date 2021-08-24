@@ -2,6 +2,7 @@
 #define HANDLER
 
 #include <iostream>
+#include <chrono>
 #include "myRing.h"
 
 using namespace std;
@@ -17,10 +18,10 @@ public:
         do
         { // if received -1 receiver method ends, so should the handler
             *value = wrapper->dequeue(&deq);
-
-            // insert a thread to make it wait for 'temp' seconds  sleep()?
+            this_thread::sleep_for(chrono::seconds(*value));
+            //cout << *value << endl;
         } while (*value != -1);
-        
+
         delete value;
     };
 };

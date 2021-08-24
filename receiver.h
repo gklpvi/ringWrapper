@@ -23,7 +23,7 @@ public:
             if (*value == -1)
                 break;
         }
-        
+
         delete value;
     };
 };
