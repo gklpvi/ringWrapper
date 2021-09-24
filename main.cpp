@@ -17,18 +17,16 @@ int main(int argc, char **argv)
   name[1] = 'k';
   name[2] = '\0';
 
-  int* deq = new int();
   ringWrapper<int *>* temp = new ringWrapper<int*>(name, 32, 0, RING_F_SP_ENQ); // to try the ring wrapper
   
   receiver* myReceiver = new receiver();
   handler* myHandler = new handler();
 
   thread t1(&receiver::input, myReceiver, temp);
-  thread t2(&handler::proccess, myHandler, temp, deq);
+  thread t2(&handler::proccess, myHandler, temp);
+  thread t3(&handler::proccess, myHandler, temp);
 
-  t1.join(); t2.join();
+  t1.join(); t2.join(); t3.join();
   
-
-
   return 0;
 }

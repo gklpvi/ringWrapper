@@ -11,18 +11,22 @@ class handler
 {
 
 public:
-    void proccess(ringWrapper<int *> *wrapper, int *deq)
+    void proccess(ringWrapper<int *> *wrapper)
     {
-        int *value = new int();
-
-        do
+        int* value = nullptr;
+        while (true) 
         { // if received -1 receiver method ends, so should the handler
-            *value = wrapper->dequeue(&deq);
-            this_thread::sleep_for(chrono::seconds(*value));
-            //cout << *value << endl;
-        } while (*value != -1);
-
-        delete value;
+            value = nullptr;
+            wrapper->dequeue(&value);
+            if(value != nullptr){
+                if(*value == -1)
+                    break;
+                for(int i=*value; i>=0; i--){
+                    cout << i << endl;
+                    this_thread::sleep_for(chrono::seconds(1));
+                }
+            }            
+        } 
     };
 };
 
